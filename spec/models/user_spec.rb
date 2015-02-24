@@ -1,46 +1,29 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  # subject { Fabricate.build(:user) }
 
-  context 'when given valid attributes' do
-    context 'and the atributes are unique' do
-      it 'creates a user with the given attributes' do
+  context 'testing validations' do
+
+    describe 'for names and password' do
+      it { is_expected.to validate_uniqueness_of(:username) }
+      it { is_expected.to validate_presence_of(:first_name) }
+      it { is_expected.to validate_presence_of(:last_name) }
+      it { is_expected.to validate_length_of(:password).is_at_least(6) }
+      it { is_expected.to validate_length_of(:password).is_at_most(20) }
+    end
+
+    describe 'for email' do
+      it { is_expected.to validate_uniqueness_of(:email) }
+
+      ['test.com', 'test@test', '2345.com', 'test@.com'].each do |email|
+        it { is_expected.to_not allow_value(email).for(:email) }
+      end
+
+      ['test.t@test.com', 'test@test.com', 'test23@test.co'].each do |email|
+        it { is_expected.to allow_value(email).for(:email) }
       end
     end
 
-    context 'and the email or username is already taken' do
-      it 'will throw a duplicate username error' do
-      end
-
-      it 'will throw a duplicate email error' do
-      end
-    end
-  end
-
-  context 'when given invalid or missing atributes' do
-    context 'when the first name is missing' do
-      it 'will throw a NameMissingError' do
-      end
-    end
-
-    context 'when the last name is missing' do
-      it 'will throw an NameMissingError' do
-      end
-    end
-
-    context 'when the username is missing' do
-      it 'will throw an NameMissingError' do
-      end
-    end
-
-    context 'when the email is missing' do
-      it 'will throw an error' do
-      end
-    end
-
-    context 'when the password is missing' do
-      it 'will throw an error' do
-      end
-    end
   end
 end

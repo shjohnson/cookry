@@ -5,4 +5,5 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name, :last_name
   validates :username, :presence => true, :uniqueness => true, :length => { :in => 3..20 }
   validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX
+  validates :password, length: { in: 6..20 }
 end
