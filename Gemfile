@@ -22,6 +22,7 @@ group :development, :test do
   gem 'faker'
   gem 'rspec-rails', '~> 3.0'
   gem 'pry'
+  gem 'rubocop', require: false
 end
 
 # To use Jbuilder templates for JSON
