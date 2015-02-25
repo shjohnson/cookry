@@ -4,7 +4,6 @@ RSpec.describe User, type: :model do
   # subject { Fabricate.build(:user) }
 
   context 'testing validations' do
-
     describe 'for names and password' do
       it { is_expected.to validate_uniqueness_of(:username) }
       it { is_expected.to validate_presence_of(:first_name) }
@@ -24,6 +23,5 @@ RSpec.describe User, type: :model do
         it { is_expected.to allow_value(email).for(:email) }
       end
     end
-
   end
 end
