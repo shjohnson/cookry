@@ -24,7 +24,6 @@ group :development, :test do
   gem 'pry'
   gem 'rubocop', require: false
 end
-
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 
