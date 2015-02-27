@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :comments, except: [:new, :edit]
+  resources :ingredients, except: [:new, :edit]
+  resources :recipes, except: [:new, :edit]
   # get 'users/new'
 
   get 'user/:id', to: 'users#show', as: :user_show
