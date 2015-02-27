@@ -49,11 +49,11 @@ class RecipesController < ApplicationController
 
   private
 
-    def set_recipe
-      @recipe = Recipe.find(params[:id])
-    end
+  def set_recipe
+    @recipe = Recipe.find(params[:id])
+  end
 
-    def recipe_params
-      params.require(:recipe).permit(:name, :rating)
-    end
+  def recipe_params
+    params.require(:recipe).permit(:name, :rating)
+  end
 end
