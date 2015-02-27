@@ -5,7 +5,7 @@ ruby '2.2.0'
 gem 'bcrypt', '~> 3.1.7'
 gem 'rails-api'
 gem 'rails', '4.1.7'
-gem 'sqlite3'
+gem 'pg'
 
 group :development do
   gem 'spring'
