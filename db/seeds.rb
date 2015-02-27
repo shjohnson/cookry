@@ -1,7 +1,5 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+current_users = User.all.count
+10.times { User.create(Fabricate.attributes_for(:user)) }
+created_users = User.all.count - current_users
+p "#{created_users} users created with these names: #{User.last(10).map(&:username)}"
+p "Total users in the database = #{User.count}"
