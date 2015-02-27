@@ -7,7 +7,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string :email
       t.string :password_digest
       t.string :salt
-      t.timestamps
+      t.timestamps null: false
     end
   end
 end
