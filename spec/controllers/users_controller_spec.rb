@@ -77,13 +77,6 @@ RSpec.describe UsersController, type: :controller do
         put :update, id: user.to_param, user: invalid_attributes
         expect(assigns(:user)).to eq(user)
       end
-
-      it "re-renders the 'edit' template" do
-        skip('need to sort out whether this will happen')
-        user = User.create! valid_attributes
-        put :update, id: user.to_param, user: invalid_attributes
-        expect(response).to render_template('edit')
-      end
     end
   end
 
@@ -93,13 +86,6 @@ RSpec.describe UsersController, type: :controller do
       expect {
         delete :destroy, id: user.to_param
       }.to change(User, :count).by(-1)
-    end
-
-    it 'redirects to the sign-in page' do
-      skip('need to sort out how this will be handled')
-      user = User.create! valid_attributes
-      delete :destroy, id: user.to_param
-      expect(response).to redirect_to
     end
   end
 end
