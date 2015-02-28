@@ -3,22 +3,16 @@ module Api
     class CommentsController < ApplicationController
       before_action :set_comment, only: [:show, :update, :destroy]
 
-      # GET /comments
-      # GET /comments.json
       def index
         @comments = Comment.all
 
         render json: @comments
       end
 
-      # GET /comments/1
-      # GET /comments/1.json
       def show
         render json: @comment
       end
 
-      # POST /comments
-      # POST /comments.json
       def create
         @comment = Comment.new(comment_params)
 
@@ -29,8 +23,6 @@ module Api
         end
       end
 
-      # PATCH/PUT /comments/1
-      # PATCH/PUT /comments/1.json
       def update
         @comment = Comment.find(params[:id])
 
@@ -41,8 +33,6 @@ module Api
         end
       end
 
-      # DELETE /comments/1
-      # DELETE /comments/1.json
       def destroy
         @comment.destroy
 

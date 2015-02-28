@@ -1,25 +1,26 @@
 module Api
   module V1
     class RecipesController < ApplicationController
-  before_action :set_recipe, only: [:show, :update, :destroy]
+      before_action :set_recipe, only: [:show, :update, :destroy]
 
-      # GET /recipes
-      # GET /recipes.json
       def index
+        # get all recipes of particular user
         @recipes = Recipe.all
 
         render json: @recipes
       end
 
-      # GET /recipes/1
-      # GET /recipes/1.json
       def show
+        # get a particular recipe of a user
         render json: @recipe
       end
 
-      # POST /recipes
-      # POST /recipes.json
+      # get all recipes of the same type
+      # Get all recipes of a particular difficulty
+
       def create
+        # Post a new recipe for a user
+
         @recipe = Recipe.new(recipe_params)
 
         if @recipe.save
@@ -29,9 +30,8 @@ module Api
         end
       end
 
-      # PATCH/PUT /recipes/1
-      # PATCH/PUT /recipes/1.json
       def update
+        # Update a new recipe for a user
         @recipe = Recipe.find(params[:id])
 
         if @recipe.update(recipe_params)
@@ -41,9 +41,8 @@ module Api
         end
       end
 
-      # DELETE /recipes/1
-      # DELETE /recipes/1.json
       def destroy
+        # Delete a recipe for a user
         @recipe.destroy
 
         head :no_content

@@ -3,22 +3,19 @@ module Api
     class IngredientsController < ApplicationController
       before_action :set_ingredient, only: [:show, :update, :destroy]
 
-      # GET /ingredients
-      # GET /ingredients.json
+      # get all ingrdients for a recipe
+      # search through ingrdients
+
       def index
         @ingredients = Ingredient.all
 
         render json: @ingredients
       end
 
-      # GET /ingredients/1
-      # GET /ingredients/1.json
       def show
         render json: @ingredient
       end
 
-      # POST /ingredients
-      # POST /ingredients.json
       def create
         @ingredient = Ingredient.new(ingredient_params)
 
@@ -29,8 +26,6 @@ module Api
         end
       end
 
-      # PATCH/PUT /ingredients/1
-      # PATCH/PUT /ingredients/1.json
       def update
         @ingredient = Ingredient.find(params[:id])
 
@@ -41,8 +36,6 @@ module Api
         end
       end
 
-      # DELETE /ingredients/1
-      # DELETE /ingredients/1.json
       def destroy
         @ingredient.destroy
 
