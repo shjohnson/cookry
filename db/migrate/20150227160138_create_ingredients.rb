@@ -1,6 +1,6 @@
 class CreateIngredients < ActiveRecord::Migration
   def change
-    create_table :ingredients do |t|
+    create_table :ingredients, id: :uuid do |t|
       t.string :name
       t.string :amount
 

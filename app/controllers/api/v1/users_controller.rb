@@ -1,8 +1,8 @@
 module Api
   module V1
     class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
-  respond_to :json, :html
+      before_action :set_user, only: [:show, :update, :destroy]
+      respond_to :json, :html
 
       def create
         @user = User.new(user_params)

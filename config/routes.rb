@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-
-  namespace :api, defaults: {format: 'json'} do
+  namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
       get 'user/:id', to: 'users#show', as: :user_show
       post 'user', to: 'users#create', as: :user_create
@@ -12,5 +11,4 @@ Rails.application.routes.draw do
       resources :comments, except: [:new, :edit]
     end
   end
-
 end

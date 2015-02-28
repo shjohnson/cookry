@@ -11,43 +11,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150227194814) do
+ActiveRecord::Schema.define(version: 20150228190533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
 
-  create_table "comments", force: true do |t|
+  create_table "comments", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
     t.string   "message"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "recipe_id"
     t.integer  "user_id"
+    t.uuid     "recipe_uuid"
+    t.uuid     "user_uuid"
   end
 
   add_index "comments", ["recipe_id"], name: "index_comments_on_recipe_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
-  create_table "ingredients", force: true do |t|
+  create_table "ingredients", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
     t.string   "name"
     t.string   "amount"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "recipe_id"
+    t.uuid     "recipe_uuid"
   end
 
   add_index "ingredients", ["recipe_id"], name: "index_ingredients_on_recipe_id", using: :btree
 
-  create_table "recipes", force: true do |t|
+  create_table "recipes", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
     t.string   "name"
     t.integer  "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
+    t.uuid     "user_uuid"
   end
 
   add_index "recipes", ["user_id"], name: "index_recipes_on_user_id", using: :btree
 
-  create_table "users", force: true do |t|
+  create_table "users", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.string   "username"
