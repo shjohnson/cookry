@@ -3,9 +3,10 @@ source 'https://rubygems.org'
 ruby '2.2.0'
 
 gem 'bcrypt', '~> 3.1.7'
+gem 'pg'
+gem 'puma'
 gem 'rails-api'
 gem 'rails', '4.1.7'
-gem 'pg'
 
 group :development do
   gem 'spring'
