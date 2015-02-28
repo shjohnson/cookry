@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe RecipesController, type: :controller do
+RSpec.describe Api::V1::RecipesController, type: :controller do
   let(:valid_attributes) {
     skip('Add a hash of attributes valid for your model')
   }
