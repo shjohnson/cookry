@@ -1,7 +1,7 @@
 class Recipe < ActiveRecord::Base
   default_scope { order('created_at ASC') }
 
-  belongs_to :user, foreign_key: 'user_uuid'
+  belongs_to :user, foreign_key: 'user_id'
   has_many :ingredients
   has_many :comments
 

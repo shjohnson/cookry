@@ -2,17 +2,21 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::RecipesController, type: :controller do
   let(:valid_attributes) {
-    skip('Add a hash of attributes valid for your model')
+    Fabricate.attributes_for(:recipe)
   }
 
   let(:invalid_attributes) {
-    skip('Add a hash of attributes invalid for your model')
+    Fabricate.attributes_for(:recipe, name: '')
+  }
+
+  let(:signed_user) {
+    pending('need to create user authentication')
   }
 
   describe 'GET #index' do
-    it 'assigns all recipes as @recipes' do
+    it 'assigns all recipes for a user as @recipes' do
       recipe = Recipe.create! valid_attributes
-      get :index, {}
+      get :index, signed_user
       expect(assigns(:recipes)).to eq([recipe])
     end
   end
@@ -29,31 +33,26 @@ RSpec.describe Api::V1::RecipesController, type: :controller do
     context 'with valid params' do
       it 'creates a new Recipe' do
         expect {
-          post :create, recipe: valid_attributes
+          post :create, signed_user, recipe: valid_attributes
         }.to change(Recipe, :count).by(1)
       end
 
       it 'assigns a newly created recipe as @recipe' do
-        post :create, recipe: valid_attributes
+        post :create, signed_user, recipe: valid_attributes
         expect(assigns(:recipe)).to be_a(Recipe)
         expect(assigns(:recipe)).to be_persisted
       end
 
       it 'redirects to the created recipe' do
-        post :create, recipe: valid_attributes
+        post :create, signed_user, recipe: valid_attributes
         expect(response).to redirect_to(Recipe.last)
       end
     end
 
     context 'with invalid params' do
       it 'assigns a newly created but unsaved recipe as @recipe' do
-        post :create, recipe: invalid_attributes
+        post :create, signed_user, recipe: invalid_attributes
         expect(assigns(:recipe)).to be_a_new(Recipe)
-      end
-
-      it "re-renders the 'new' template" do
-        post :create, recipe: invalid_attributes
-        expect(response).to render_template('new')
       end
     end
   end
@@ -77,10 +76,10 @@ RSpec.describe Api::V1::RecipesController, type: :controller do
         expect(assigns(:recipe)).to eq(recipe)
       end
 
-      it 'redirects to the recipe' do
+      it 'redirects to the newly created recipe' do
         recipe = Recipe.create! valid_attributes
         put :update, id: recipe.to_param, recipe: valid_attributes
-        expect(response).to redirect_to(recipe)
+        expect(response.body).to include(Recipe.last.id)
       end
     end
 
@@ -89,12 +88,6 @@ RSpec.describe Api::V1::RecipesController, type: :controller do
         recipe = Recipe.create! valid_attributes
         put :update, id: recipe.to_param, recipe: invalid_attributes
         expect(assigns(:recipe)).to eq(recipe)
-      end
-
-      it "re-renders the 'edit' template" do
-        recipe = Recipe.create! valid_attributes
-        put :update, id: recipe.to_param, recipe: invalid_attributes
-        expect(response).to render_template('edit')
       end
     end
   end
@@ -107,10 +100,13 @@ RSpec.describe Api::V1::RecipesController, type: :controller do
       }.to change(Recipe, :count).by(-1)
     end
 
-    it 'redirects to the recipes list' do
-      recipe = Recipe.create! valid_attributes
-      delete :destroy, id: recipe.to_param
-      expect(response).to redirect_to(recipes_url)
+    context 'if the user has other recipes' do
+      specify 'redirects to the users recipes list' do
+      end
+    end
+    context 'if the user had no other recipes' do
+      specify 'it redirects them to create recipe page' do
+      end
     end
   end
 end

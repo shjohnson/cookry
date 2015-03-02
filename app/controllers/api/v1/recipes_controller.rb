@@ -5,7 +5,8 @@ module Api
 
       def index
         # get all recipes of particular user
-        @recipes = Recipe.all
+        # user = User.find_by_id(params[:id])
+        @recipe = user.recipes
 
         render json: @recipes
       end
@@ -24,7 +25,7 @@ module Api
         @recipe = Recipe.new(recipe_params)
 
         if @recipe.save
-          render json: @recipe, status: :created, location: @recipe
+          render json: @recipe, status: :created
         else
           render json: @recipe.errors, status: :unprocessable_entity
         end
@@ -35,7 +36,7 @@ module Api
         @recipe = Recipe.find(params[:id])
 
         if @recipe.update(recipe_params)
-          head :no_content
+          render json: @recipe, status: :ok
         else
           render json: @recipe.errors, status: :unprocessable_entity
         end
@@ -55,7 +56,7 @@ module Api
       end
 
       def recipe_params
-        params.require(:recipe).permit(:name, :rating)
+        params.require(:recipe).permit(:user_id,:name, :rating)
       end
     end
   end

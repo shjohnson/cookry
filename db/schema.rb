@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150228223527) do
+ActiveRecord::Schema.define(version: 20150301131028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,18 +19,18 @@ ActiveRecord::Schema.define(version: 20150228223527) do
 
   create_table "comments", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
     t.string   "message"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.uuid     "recipe_uuid"
-    t.uuid     "user_uuid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid     "recipe_id"
+    t.uuid     "user_id"
   end
 
   create_table "ingredients", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
     t.string   "name"
     t.string   "amount"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.uuid     "recipe_uuid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid     "recipe_id"
   end
 
   create_table "recipes", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20150228223527) do
     t.integer  "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid     "user_uuid"
+    t.uuid     "user_id"
   end
 
   create_table "users", id: :uuid, default: "uuid_generate_v4()", force: true do |t|

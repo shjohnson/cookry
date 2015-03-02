@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  # subject { Fabricate.build(:user) }
 
   context 'testing validations' do
     describe 'for names and password' do
