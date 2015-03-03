@@ -1,5 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Recipe, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context 'testing vallidations' do
+    describe 'for names, ratings and user' do
+      it { is_expected.to validate_presence_of(:name) }
+      it { is_expected.to validate_presence_of(:rating) }
+      it { is_expected.to validate_presence_of(:user_id) }
+    end
+  end
 end

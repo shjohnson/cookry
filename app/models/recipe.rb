@@ -1,5 +1,8 @@
 class Recipe < ActiveRecord::Base
+  include Filterable
   default_scope { order('created_at ASC') }
+
+  # attr_accessor :rating, :name
 
   belongs_to :user, foreign_key: 'user_id'
   has_many :ingredients

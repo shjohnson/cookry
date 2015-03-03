@@ -16,7 +16,7 @@ RSpec.describe Api::V1::RecipesController, type: :controller do
   describe 'GET #index' do
     it 'assigns all recipes for a user as @recipes' do
       recipe = Recipe.create! valid_attributes
-      get :index, signed_user
+      get :index
       expect(assigns(:recipes)).to eq([recipe])
     end
   end

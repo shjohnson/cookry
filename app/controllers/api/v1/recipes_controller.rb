@@ -2,13 +2,14 @@ module Api
   module V1
     class RecipesController < ApplicationController
       before_action :set_recipe, only: [:show, :update, :destroy]
+      respond_to :json, :html
 
       def index
-        # get all recipes of particular user
-        # user = User.find_by_id(params[:id])
-        @recipe = user.recipes
-
+        @recipes = Recipe.filter(params.slice(:name, :rating))
         render json: @recipes
+
+        # user = User.find_by_id(params[:id])
+        # get all recipes of particular user
       end
 
       def show
@@ -56,7 +57,7 @@ module Api
       end
 
       def recipe_params
-        params.require(:recipe).permit(:user_id,:name, :rating)
+        params.require(:recipe).permit(:user_id, :name, :rating)
       end
     end
   end
