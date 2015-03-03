@@ -6,7 +6,12 @@ Rails.application.routes.draw do
       put 'user/:id', to: 'users#update', as: :user_edit
       delete 'user/:id', to: 'users#destroy', as: :user_delete
 
-      resources :recipes, except: [:new, :edit]
+      get 'recipes', to: 'recipes#index', as: :recipes
+      get 'recipes/:id', to: 'recipes#show', as: :recipes_show
+      post 'recipes', to: 'recipes#create', as: :recipes_create
+      put 'recipes/:id ', to: 'recipes#update', as: :recipes_edit
+      delete 'recipes/:id', to: 'recipes#destroy', as: :recipes_delete
+
       resources :ingredients, except: [:new, :edit]
       resources :comments, except: [:new, :edit]
     end
